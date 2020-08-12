@@ -18,10 +18,10 @@ chmod +x /bin/telegram</pre>
 Edite o arquivo /bin/telegram
 
 Altere o token:
-TOKEN="000000000:0000000000000-0000000000000000000000000000000"
+<pre>TOKEN="000000000:0000000000000-0000000000000000000000000000000"</pre>
 
 Escolha o metodo de compactação tar/zip
-COMPAC='tar'
+<pre>COMPAC='tar'</pre>
 
 <b>Modelo de uso:</b>
 
