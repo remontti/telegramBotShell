@@ -26,16 +26,15 @@ then
     curl --silent -X POST --data-urlencode "chat_id=$2" --data-urlencode "text=$3${NN=}$4${NN=}$5" "https://api.telegram.org/bot${TOKEN}/sendMessage?disable_web_page_preview=true&parse_mode=html" | grep -q '"ok":true' &>/dev/null
   elif [  "$1" = "-f" ]
   then
-    datetime=`date +%Y%m%d_%H%M`
+    datetime=`date +%Y-%m-%d_%H-%M`
     if [  "$COMPAC" = "zip" ]
     then
-        file_zip_name="/tmp/$4.${datetime}.zip"
+        file_zip_name="/tmp/${datetime}.$4.zip"
         zip ${file_zip_name} $3 &>/dev/null
     else
-        file_zip_name="/tmp/$4.${datetime}.tar.gz"
+        file_zip_name="/tmp/${datetime}.$4.tar.gz"
         tar -czpf ${file_zip_name} $3 &>/dev/null
     fi
-
     curl -F document=@"${file_zip_name}" -F caption="$5" "https://api.telegram.org/bot${TOKEN}/sendDocument?chat_id=$2" &>/dev/null
     rm ${file_zip_name}
   else
