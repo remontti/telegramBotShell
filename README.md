@@ -14,6 +14,15 @@ CentOS / Fedora / Red hat
 wget https://raw.githubusercontent.com/remontti/telegramBotShell/master/telegram -O /bin/telegram
 chmod +x /bin/telegram</pre>
 
+<b>Configurações</b>
+Edite o arquivo /bin/telegram
+
+Altere o token:
+TOKEN="000000000:0000000000000-0000000000000000000000000000000"
+
+Escolha o metodo de compactação tar/zip
+COMPAC='tar'
+
 <b>Modelo de uso:</b>
 
 - -m: Para enviar uma mensagem
