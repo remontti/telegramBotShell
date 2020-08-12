@@ -11,8 +11,8 @@ CentOS / Fedora / Red hat
 
 <b>Instalacação:</b>
 <pre>
-wget -O /bin/telegramBotShell
-chmod +x /bin/telegramBotShell</pre>
+wget https://raw.githubusercontent.com/remontti/telegramBotShell/master/telegram -O /bin/telegram
+chmod +x /bin/telegram</pre>
 
 <b>Modelo de uso:</b>
 
