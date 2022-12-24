@@ -5,6 +5,8 @@
 TOKEN="000000000:0000000000000-0000000000000000000000000000000"
 
 # METODO DE COMPACTACAO - zip ou tar
+# Certifique-se de ter os pacotes instaldos
+# apt install zip tar 
 COMPAC='tar'
 
 # --- Não alterar nada mais --- # 
@@ -24,6 +26,11 @@ Uso: telegram [Opções]
 if [  "$1" = "-m" ]
 then
     curl --silent -X POST --data-urlencode "chat_id=$2" --data-urlencode "text=$3${NN=}$4${NN=}$5" "https://api.telegram.org/bot${TOKEN}/sendMessage?disable_web_page_preview=true&parse_mode=html" | grep -q '"ok":true' &>/dev/null
+    if [ $? -ne 0 ]; then
+      echo "Erro ao enviar mensagem"
+      exit 1
+    fi
+
   elif [  "$1" = "-f" ]
   then
     datetime=`date +%Y-%m-%d_%H-%M`
@@ -31,12 +38,24 @@ then
     then
         file_zip_name="/tmp/${datetime}.$4.zip"
         zip ${file_zip_name} $3 &>/dev/null
+        if [ $? -ne 0 ]; then
+          echo "Erro ao compactar arquivo"
+          exit 1
+        fi        
     else
         file_zip_name="/tmp/${datetime}.$4.tar.gz"
         tar -czpf ${file_zip_name} $3 &>/dev/null
+        if [ $? -ne 0 ]; then
+          echo "Erro ao compactar arquivo"
+          exit 1
+        fi        
     fi
     curl -F document=@"${file_zip_name}" -F caption="$5" "https://api.telegram.org/bot${TOKEN}/sendDocument?chat_id=$2" &>/dev/null
     rm ${file_zip_name}
+    if [ $? -ne 0 ]; then
+      echo "Erro ao enviar arquivo"
+      exit 1
+    fi
   else
     echo "${AJUDA}"
     exit 1
